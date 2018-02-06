@@ -17,12 +17,12 @@ ROOT_CHECK=""
 
 pos=0
 for item in "${ITEMS[@]}"; do
-	[[  -e "${ROOT_CHECK}/${item}/vendor" &&
-		-d "${ROOT_CHECK}/${item}/vendor" ]]	\
-		&& PROJECT_ROOT=${ROOT_CHECK}			\
-	   	&& PROJECT=${item}						\
-		&& echo "MATCH"							\
-	   	&& break
+	[[	-e "${ROOT_CHECK}/${item}/vendor" &&
+		-d "${ROOT_CHECK}/${item}/vendor" ]] \
+		&& PROJECT_ROOT=${ROOT_CHECK} \
+		&& PROJECT=${item} \
+		&& echo "MATCH" \
+		&& break
 	ROOT_CHECK+="/$item"
 	((++pos))
 done
