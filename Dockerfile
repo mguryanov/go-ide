@@ -19,6 +19,7 @@ ENV SHELL zsh
 
 RUN apt-get -q update && \
   apt-get install --no-install-recommends -y --force-yes -q \
+	locales \
 	ca-certificates \
 	zsh \
 	curl \
@@ -80,4 +81,10 @@ ADD vimrc /root/.vimrc
 ADD zshrc /root/.zshrc
 
 ENV TERM="xterm-256color"
+
+RUN sed -i 's/^# *\(ru_RU.UTF-8\)/\1/' /etc/locale.gen
+RUN locale-gen
+ENV LANG=ru_RU.UTF-8 \
+	LC_CTYPE="ru_RU.UTF-8"
+
 CMD /usr/bin/tmux new "/usr/bin/vim /go/src/${PROJECT_FILE_PATH}"
