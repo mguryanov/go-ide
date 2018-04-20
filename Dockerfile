@@ -35,6 +35,7 @@ RUN apt-get -q update && \
   apt-get clean && \
   rm /var/lib/apt/lists/*_*
 
+RUN go get -u golang.org/x/net/proxy
 RUN go get	github.com/nsf/gocode \
 		golang.org/x/tools/cmd/goimports \
 		github.com/rogpeppe/godef \
@@ -85,6 +86,6 @@ ENV TERM="xterm-256color"
 RUN sed -i 's/^# *\(ru_RU.UTF-8\)/\1/' /etc/locale.gen
 RUN locale-gen
 ENV LANG=ru_RU.UTF-8 \
-	LC_CTYPE="ru_RU.UTF-8"
+    LC_CTYPE="ru_RU.UTF-8"
 
 CMD /usr/bin/tmux new "/usr/bin/vim /go/src/${PROJECT_FILE_PATH}"
